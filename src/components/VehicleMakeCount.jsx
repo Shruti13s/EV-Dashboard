@@ -1,18 +1,25 @@
 import React from 'react';
-import { Chart } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
+import { Bar } from 'react-chartjs-2'; 
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from 'chart.js';
 
 ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const VehicleCountByMake = ({ data }) => {
-  // Aggregate data by vehicle make
   const makeCount = data.reduce((acc, item) => {
     const make = item.Make;
     acc[make] = (acc[make] || 0) + 1;
     return acc;
   }, {});
 
-  const makes = Object.keys(makeCount); 
+  const makes = Object.keys(makeCount);
   const counts = Object.values(makeCount); 
 
   const chartData = {
@@ -20,9 +27,9 @@ const VehicleCountByMake = ({ data }) => {
     datasets: [
       {
         label: 'Vehicle Count by Make',
-        data: counts, 
-        backgroundColor: 'rgba(75, 192, 192, 0.2)', 
-        borderColor: 'rgba(75, 192, 192, 1)', 
+        data: counts,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       },
     ],
@@ -31,7 +38,7 @@ const VehicleCountByMake = ({ data }) => {
   return (
     <div>
       <h2>Vehicle Count by Make</h2>
-      <Chart type="bar" data={chartData} />
+      <Bar data={chartData} />
     </div>
   );
 };

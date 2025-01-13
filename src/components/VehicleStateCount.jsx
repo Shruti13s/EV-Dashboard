@@ -1,6 +1,14 @@
 import React from 'react';
-import { Chart } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
+import { Bar } from 'react-chartjs-2'; 
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from 'chart.js';
 
 ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
@@ -32,7 +40,7 @@ const VehicleCountByState = ({ data }) => {
   return (
     <div>
       <h2>Vehicle Count by State</h2>
-      <Chart type="bar" data={chartData} />
+      <Bar data={chartData} />
     </div>
   );
 };

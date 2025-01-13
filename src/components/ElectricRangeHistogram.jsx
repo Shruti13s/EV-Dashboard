@@ -1,17 +1,23 @@
 import React from 'react';
-import { Chart } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from 'chart.js';
 
 ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const ElectricRangeHistogram = ({ data }) => {
   const electricRanges = data.map(item => parseFloat(item['Electric Range']) || 0);
-
   const binCount = 10;
   const maxRange = Math.max(...electricRanges);
   const minRange = Math.min(...electricRanges);
   const binSize = (maxRange - minRange) / binCount;
-
   const bins = Array(binCount).fill(0);
   electricRanges.forEach(range => {
     const binIndex = Math.floor((range - minRange) / binSize);
@@ -19,7 +25,6 @@ const ElectricRangeHistogram = ({ data }) => {
       bins[binIndex]++;
     }
   });
-
   const chartData = {
     labels: Array.from({ length: binCount }, (_, i) => `${Math.round(minRange + binSize * i)} - ${Math.round(minRange + binSize * (i + 1))} miles`),
     datasets: [
@@ -32,11 +37,10 @@ const ElectricRangeHistogram = ({ data }) => {
       },
     ],
   };
-
   return (
     <div>
       <h2>Electric Range Distribution</h2>
-      <Chart type="bar" data={chartData} />
+      <Bar data={chartData} />
     </div>
   );
 };
